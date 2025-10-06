@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: Layout(~{::section})}">
+<body>
+<section class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="alert alert-danger text-center shadow-sm rounded">
+                <h4 class="alert-heading">Login Failed</h4>
+                <p>Please try again with the correct username and password.</p>
+                <hr>
+                <a th:href="@{/signin}" class="btn btn-primary btn-sm">Back to Login</a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
+
+

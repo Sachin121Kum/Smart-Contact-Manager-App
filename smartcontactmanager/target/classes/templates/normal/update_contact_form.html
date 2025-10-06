@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{normal/base :: Layout(~{::section})}">
+<body>
+<section>
+   <div class="card mr-3 ml-3">
+       <div class="card-body">
+           <h1 class="text-center" th:text="${title}"></h1>
+
+           <!-- Optional session message -->
+           <!--
+           <div th:if="${session.message}" class="alert" th:classappend="${session.message.type}" role="alert">
+               <p class="text-center" th:text="${session.message.content}"></p>
+           </div>
+           -->
+
+           <div class="container-fluid mt-1">
+               <div class="row">
+                   <div class="col-md-8 offset-md-2">
+                       <form th:action="@{/user/process-update}" 
+                             th:object="${contact}" 
+                             method="post" 
+                             enctype="multipart/form-data"
+                             class="mt-2">
+
+                           <!-- Name -->
+                           <div class="input-group">
+                               <div class="input-group-prepend">
+                                   <div class="input-group-text mr-2">
+                                       <i class="fa fa-plus"></i>
+                                   </div>
+                               </div>
+                               <input required type="text" id="firstName" th:value="${contact.name}" name="name" class="form-control" placeholder="Enter Name here"/>
+                           </div>
+                           
+<input type="hidden" name="cid" th:value="${contact.cid}" />
+
+                           <!-- Nick Name -->
+                           <div class="input-group mt-3">
+                               <div class="input-group-prepend">
+                                   <div class="input-group-text mr-2">
+                                       <i class="fas fa-user-alt"></i>
+                                   </div>
+                               </div>
+                               <input required type="text" id="secondName" name="secondName" th:value="${contact.secondName}" class="form-control" placeholder="Enter Nick Name here"/>
+                           </div>
+
+                           <!-- Phone -->
+                           <div class="input-group mt-3">
+                               <div class="input-group-prepend">
+                                   <div class="input-group-text mr-2">
+                                       <i class="fas fa-phone"></i>
+                                   </div>
+                               </div>
+                               <input required type="number" id="phone" name="phone" th:value="${contact.phone}"  class="form-control" placeholder="Enter Phone Number here"/>
+                           </div>
+
+                           <!-- Email -->
+                           <div class="input-group mt-3">
+                               <div class="input-group-prepend">
+                                   <div class="input-group-text mr-2">
+                                       <i class="fas fa-envelope"></i>
+                                   </div>
+                               </div>
+                               <input required type="email" id="email" name="email" th:value="${contact.email}" class="form-control" placeholder="Enter Email here"/>
+                           </div>
+
+                           <!-- Work -->
+                           <div class="input-group mt-3">
+                               <div class="input-group-prepend">
+                                   <div class="input-group-text mr-2">
+                                       <i class="fas fa-briefcase"></i>
+                                   </div>
+                               </div>
+                               <input required type="text" id="work" name="work" th:value="${contact.work}" class="form-control" placeholder="Enter Work here"/>
+                           </div>
+
+                           <!-- Description -->
+                           <div class="form-group mt-3">
+                               <textarea name="description" 
+                                         id="mytextarea" 
+                                         class="form-control" 
+                                         rows="10" 
+                                         th:text="${contact.description}"
+                                         placeholder="Enter Description here"></textarea>
+                           </div>
+
+                           <!-- Image upload -->
+                        <!--    <div class="custom-file mt-3">
+                               <input type="file" name="image" class="custom-file-input" id="image">
+                               <label class="custom-file-label" for="image">Choose file</label>
+                           </div> -->
+
+                           <div class="container text-center mt-3">
+                               <button type="submit" class="btn btn-outline-primary">Update Contact</button>
+                           </div>
+                       </form>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <!-- TinyMCE Integration -->
+<!-- Place the first <script> tag in your HTML's <head> -->
+<script src="https://cdn.tiny.cloud/1/091vsnlkf9pomsmx18gcynibn2naa5pr2cy2epck5m65jk7o/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
+<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+<script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: [
+      // Core editing features
+      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+      // Your account includes a free trial of TinyMCE premium features
+      // Try the most popular premium features until Oct 19, 2025:
+      'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'advtemplate', 'ai', 'uploadcare', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+    ],
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+    uploadcare_public_key: '3fc40b5426ab87b3f88a',
+  });
+</script>
+</section>
+</body>
+</html>

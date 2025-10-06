@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{normal/base :: Layout(~{::section})}">
+<body>
+<section class="my-5">
+    <div class="container">
+        <div class="card shadow-lg mx-auto" style="max-width: 800px; border-radius: 20px; overflow: hidden;">
+            <div class="row g-0">
+                <!-- Profile Image -->
+                <div class="col-md-4 text-center p-4 bg-light">
+                    <img th:src="@{/img/default.png}"
+                         alt="Profile Image"
+                         class="img-fluid rounded-circle border border-4 border-primary shadow-sm"
+                         style="width: 180px; height: 180px; object-fit: cover;">
+                </div>
+
+                <!-- User Info -->
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <!-- Name & Role -->
+                        <h2 class="card-title fw-bold" th:text="${user.name}"></h2>
+                        <p class="mb-2">
+                            <span class="badge bg-primary me-2 px-3 py-2 fw-semibold" th:text="${user.role}"></span>
+                            <span class="badge" th:classappend="${user.enabled} ? 'bg-success' : 'bg-secondary'"
+                                  th:text="${user.enabled} ? 'Active' : 'Inactive'"></span>
+                        </p>
+
+                        <!-- About -->
+                        <p class="text-muted fst-italic" th:text="${user.about}"></p>
+
+                        <!-- User Details Table -->
+                        <table class="table table-borderless table-sm mt-3">
+                            <tbody>
+                                <tr>
+                                    <th>ID:</th>
+                                    <td th:text="${user.id}"></td>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td th:text="${user.email}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Contacts -->
+                        <div th:if="${user.contacts.size() > 0}" class="mt-3">
+                            <h5 class="fw-bold">Contacts:</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center" 
+                                    th:each="contact : ${user.contacts}">
+                                    <span th:text="${contact.name}"></span>
+                                    <span class="badge bg-info text-dark rounded-pill" th:text="${contact.phone}"></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                
+                    </div>
+                </div>
+            </div>
+
+            <!-- Permission Warning -->
+            <h5 class="text-center p-3 bg-danger text-white" th:unless="${user}">
+                You don't have permission to see this user...
+            </h5>
+        </div>
+    </div>
+</section>
+</body>
+</html>
