@@ -1,5 +1,5 @@
 📋 Project Overview
-Your application is a Smart Contact Manager - a modern, secure web application built with Spring Boot for managing personal contacts efficiently.
+Smart Contact Manager - a modern, secure web application built with Spring Boot for managing personal contacts efficiently.
 
 🚀 Key Features Identified
 User Authentication & Security: Complete Spring Security integration with BCrypt password encoding
